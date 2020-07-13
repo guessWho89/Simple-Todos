@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, serif;
+}
+
+:root {
+    --blue: #00b4eb;
+    --pink: #e22b4c;
+    --green: #3bc563;
+    --gray: #aeaeae;
+}
+
+.box { 
+    padding: 20px;
+    margin: auto;
+    /* border-bottom: 1px solid #ccc; */
+}
+
+.flex { 
+    display: flex;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.addItem {
+    background: var(--green);
+}
+
+.delItem {
+    background: var(--pink);
+}
+
+input {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+}
+
+ol {
+    padding-left: 20px;
+}
+
+li {
+    padding: 9px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+li span {
+    display: block;
+    width: calc(100% - 60px);
+}
+
+li button { 
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.checked {
+    text-decoration: line-through;
+    background: #ccc;
+    opacity: 0.7;
+}
