@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Todos</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/banner.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="sw.js"></script>
 </head>
+
 <body>
+    <div id="installBanner">
+        <div class="holder">
+            <span id="closeBanner">×</span>
+            <p id="installText">Add your app to homescreen</p>
+            <button id="btnInstall">Install</button>
+        </div>
+    </div>
 
     <div class="box flex">
         <input type="text" name="newItem" class="newItem" placeholder="Add new item..">
@@ -16,7 +28,9 @@
         <ol class="list">
         </ol>
     </div>
-    
-    <script src="script.js"></script>
+
+    <script src="js/reg-sw.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>

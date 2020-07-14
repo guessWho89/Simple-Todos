@@ -1,0 +1,47 @@
+#installBanner {
+    padding: 10px;
+    background: #beefff;
+    align-items: center;
+    margin-top: -50px;
+    transition: 0.5s;
+}
+
+#closeBanner {
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#btnInstall {
+    border: none;
+    border-radius: 0;
+    outline: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    background: #0981b1;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+}
+
+#installText {
+    padding: 0;
+    text-align: center;
+    width: calc(100% - 100px);
+}
+
+.holder {
+    max-width: 1024px;
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+    position: relative;
+}
+
+#installBanner>.holder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
