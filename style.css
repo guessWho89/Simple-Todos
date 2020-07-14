@@ -32,6 +32,10 @@
     cursor: pointer;
 }
 
+.itemText { 
+    cursor: pointer;
+}
+
 .addItem {
     background: var(--green);
 }
