@@ -6,7 +6,6 @@ let allItems = [];
 
 window.onload = () => {
     allItems = JSON.parse(localStorage.getItem('list-1'));
-    console.log(allItems);
     for (let i = 0; i < allItems.length; i++) {
         const item = document.createElement('li');
         item.setAttribute('class', 'item');
@@ -19,7 +18,7 @@ window.onload = () => {
     }
 };
 
-addBtn.addEventListener('click', () => {
+addBtn.onclick = () => {
     if (newItem.value !== '') {
         const item = document.createElement('li');
         item.setAttribute('class', 'item');
@@ -33,18 +32,24 @@ addBtn.addEventListener('click', () => {
         localStorage.setItem('list-1', JSON.stringify(allItems));
         newItem.value = '';
     }
-});
+};
 
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('delItem')) {
-        e.target.parentNode.remove();
+document.onclick = (e) => {
+    const clicked = e.target;
+    const parent = e.target.parentNode;
+    if (clicked.classList.contains('delItem')) {
+        parent.remove();
     }
-});
-
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('itemText')) {
-        e.target.parentNode.classList.add('checked');
+    if (clicked.classList.contains('itemText')) {
+        parent.classList.contains('checked') ?
+            parent.classList.remove('checked') :
+            parent.classList.add('checked');
     }
-});
+};
 
-
+// let li = document.querySelectorAll('li');
+// for (let i = 0; i < li.length; i++) {
+//     li[i].onclick = () => {
+//         console.log(i);
+//     }
+// }
