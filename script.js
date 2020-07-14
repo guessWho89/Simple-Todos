@@ -42,14 +42,14 @@ document.onclick = (e) => {
     }
     if (clicked.classList.contains('itemText')) {
         parent.classList.contains('checked') ?
-            parent.classList.remove('checked') :
+            parent.classList.remove('checked') : 
             parent.classList.add('checked');
     }
 };
 
 // let li = document.querySelectorAll('li');
 // for (let i = 0; i < li.length; i++) {
-//     li[i].onclick = () => {
+//     li[i].onclick = () => { 
 //         console.log(i);
 //     }
 // }
