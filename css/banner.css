@@ -1,6 +1,6 @@
 #installBanner {
     padding: 10px;
-    background: #beefff;
+    background: #eee;
     align-items: center;
     margin-top: -50px;
     transition: 0.5s;
@@ -20,12 +20,12 @@
     outline: none;
     padding: 10px 20px;
     font-weight: bold;
-    background: #0981b1;
+    background: var(--blue);
     color: #fff;
     cursor: pointer;
-    /* position: absolute; */
-    /* right: 10px; */
-    margin: 0 20px;
+    position: absolute;
+    right: 10px;
+    margin: 0px 20px;
 }
 
 #installText {
@@ -47,5 +47,5 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 0;
+    padding: 10px;
 }
