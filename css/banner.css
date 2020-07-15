@@ -2,8 +2,9 @@
     padding: 10px;
     background: #eee;
     align-items: center;
-    margin-top: -50px;
+    margin-top: -60px;
     transition: 0.5s;
+    height: 60px;
 }
 
 #closeBanner {
