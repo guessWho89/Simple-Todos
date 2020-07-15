@@ -5,26 +5,32 @@ const list = document.querySelector('.list');
 let allItems = [];
 let checkedItems = [];
 
+const render = () => {
+    const li = document.createElement('li');
+    li.classList.add('item', 'draggable');
+    li.setAttribute('draggable', 'true');
+    li.innerHTML = `
+        <span class="itemText"></span>
+        <button class="btn editItem">&#9998;</button>
+        <button class="btn delItem">&#128465;</button>
+    `;
+    list.appendChild(li);
+    addEventsDragAndDrop(li);
+}
+
 window.onload = () => {
     // get all items
     if (localStorage.getItem('allItems') !== null) {
         allItems = JSON.parse(localStorage.getItem('allItems'));
         allItems.forEach(item => {
-            const li = document.createElement('li');
-            li.setAttribute('class', 'item');
-            list.appendChild(li);
-            li.innerHTML = `
-                <span class="itemText"></span>
-                <button class="btn editItem">&#9998;</button>
-                <button class="btn delItem">&#128465;</button>
-            `;
+            render();
             document.querySelector('li:last-child .itemText').innerText = item;
         });
     }
     // get checked items
     if (localStorage.getItem('checkedItems') !== null) {
-        checkedItems = JSON.parse(localStorage.getItem('checkedItems'));    
-        let lis = document.querySelectorAll('li');    
+        checkedItems = JSON.parse(localStorage.getItem('checkedItems'));
+        let lis = document.querySelectorAll('li');
         lis.forEach(li => {
             let item = li.children[0].innerText;
             if (checkedItems.includes(item)) {
@@ -36,14 +42,7 @@ window.onload = () => {
 
 addBtn.onclick = () => {
     if (newItem.value !== '') {
-        const item = document.createElement('li');
-        item.setAttribute('class', 'item');
-        list.appendChild(item);
-        item.innerHTML = `
-            <span class="itemText"></span>
-            <button class="btn editItem">&#9998;</button>
-            <button class="btn delItem">&#128465;</button>
-        `;
+        render();
         document.querySelector('li:last-child .itemText').innerText = newItem.value;
         allItems.push(newItem.value);
         localStorage.setItem('allItems', JSON.stringify(allItems));
@@ -70,7 +69,7 @@ document.onclick = (e) => {
         promptInput.value = thisText;
     }
     if (clicked.id === 'promptOk') {
-        const edit = document.querySelector('.edit'); 
+        const edit = document.querySelector('.edit');
         let old = edit.children[0].innerText;
         let num = allItems.indexOf(old);
         edit.children[0].innerText = promptVal;
