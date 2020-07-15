@@ -8,11 +8,12 @@
 }
 
 #closeBanner {
-    font-size: 30px;
+    font-size: 25px;
     line-height: 1;
     cursor: pointer;
     position: absolute;
     right: 0px;
+    color: var(--gray);
 }
 
 #btnInstall {
