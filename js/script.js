@@ -15,15 +15,16 @@ window.onload = () => {
             list.appendChild(li);
             li.innerHTML = `
                 <span class="itemText"></span>
-                <button class="btn delItem">Del</button>
+                <button class="btn editItem">&#9998;</button>
+                <button class="btn delItem">&#128465;</button>
             `;
             document.querySelector('li:last-child .itemText').innerText = item;
         });
     }
     // get checked items
     if (localStorage.getItem('checkedItems') !== null) {
-        checkedItems = JSON.parse(localStorage.getItem('checkedItems'));
-        let lis = document.querySelectorAll('li');
+        checkedItems = JSON.parse(localStorage.getItem('checkedItems'));    
+        let lis = document.querySelectorAll('li');    
         lis.forEach(li => {
             let item = li.children[0].innerText;
             if (checkedItems.includes(item)) {
@@ -40,7 +41,8 @@ addBtn.onclick = () => {
         list.appendChild(item);
         item.innerHTML = `
             <span class="itemText"></span>
-            <button class="btn delItem">Del</button>
+            <button class="btn editItem">&#9998;</button>
+            <button class="btn delItem">&#128465;</button>
         `;
         document.querySelector('li:last-child .itemText').innerText = newItem.value;
         allItems.push(newItem.value);
@@ -52,13 +54,29 @@ addBtn.onclick = () => {
 document.onclick = (e) => {
     let clicked = e.target;
     let parent = e.target.parentNode;
+    let thisText = parent.children[0].innerText;
+    let i = allItems.indexOf(thisText);
     // delete item
     if (clicked.classList.contains('delItem')) {
-        let deleted = parent.children[0].innerText;
-        let i = allItems.indexOf(deleted);
         allItems.splice(i, 1);
         localStorage.setItem('allItems', JSON.stringify(allItems));
         parent.remove();
+    }
+    // edit item
+    if (clicked.classList.contains('editItem')) {
+        parent.classList.add('edit');
+        promptBox('Edit your item..', true);
+        const promptInput = document.querySelector('#promptInput');
+        promptInput.value = thisText;
+    }
+    if (clicked.id === 'promptOk') {
+        const edit = document.querySelector('.edit'); 
+        let old = edit.children[0].innerText;
+        let num = allItems.indexOf(old);
+        edit.children[0].innerText = promptVal;
+        allItems[num] = promptVal;
+        localStorage.setItem('allItems', JSON.stringify(allItems));
+        edit.classList.remove('edit');
     }
     // check item
     if (clicked.classList.contains('itemText')) {

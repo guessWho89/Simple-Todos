@@ -41,7 +41,24 @@
 }
 
 .delItem {
-    background: var(--pink);
+    font-size: 40px;
+    color: var(--pink);
+    background: transparent;
+    height: 40px;
+    width: 38px;
+    line-height: 35px;
+    padding: 0px;
+    text-align: center;
+}
+
+.editItem {
+    right: 40px;
+    background: transparent;
+    color: var(--blue);
+    font-size: 32px;
+    height: 40px;
+    padding: 0;
+    line-height: 30px;
 }
 
 input {
@@ -58,7 +75,6 @@ ol {
 }
 
 li {
-    padding: 9px;
     margin-bottom: 5px;
     position: relative;
 }
@@ -66,6 +82,9 @@ li {
 li span {
     display: block;
     width: calc(100% - 60px);
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 10px;
 }
 
 li button { 
@@ -76,6 +95,5 @@ li button {
 
 .checked {
     text-decoration: line-through;
-    background: #ccc;
-    opacity: 0.7;
+    background: #eee;
 }
