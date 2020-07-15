@@ -10,6 +10,8 @@
     font-size: 30px;
     line-height: 1;
     cursor: pointer;
+    position: absolute;
+    right: 0px;
 }
 
 #btnInstall {
@@ -21,14 +23,16 @@
     background: #0981b1;
     color: #fff;
     cursor: pointer;
-    position: absolute;
-    right: 10px;
+    /* position: absolute; */
+    /* right: 10px; */
+    margin: 0 20px;
 }
 
 #installText {
     padding: 0;
-    text-align: center;
-    width: calc(100% - 100px);
+    /* text-align: center; */
+    /* width: calc(100% - 100px); */
+    width: auto;
 }
 
 .holder {
