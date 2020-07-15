@@ -38,6 +38,7 @@
 
 .addItem {
     background: var(--green);
+    font-weight: bold;
 }
 
 .delItem {
