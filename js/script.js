@@ -11,6 +11,10 @@ const render = () => {
     li.setAttribute('draggable', 'true');
     li.innerHTML = `
         <span class="itemText"></span>
+        <label class="doneLabel">
+            <input type="checkbox" name="done" class="done">
+            <span class="checkBox"></span>
+        </label>
         <button class="btn editItem">&#9998;</button>
         <button class="btn delItem">&#128465;</button>
     `;
@@ -34,8 +38,12 @@ window.onload = () => {
         lis.forEach(li => {
             let item = li.children[0].innerText;
             if (checkedItems.includes(item)) {
-                li.classList.add('checked');
+                li.classList.add('checked');                
             }
+        });
+        let checked = document.querySelectorAll('.checked');
+        checked.forEach(el => {
+            el.children[1].children[0].setAttribute('checked', true);
         });
     }
 };
@@ -78,19 +86,18 @@ document.onclick = (e) => {
         edit.classList.remove('edit');
     }
     // check item
-    if (clicked.classList.contains('itemText')) {
-        let text = clicked.innerText;
-        if (parent.classList.contains('checked')) {
-            parent.classList.remove('checked');
+    if (clicked.classList.contains('done')) {
+        let text = parent.parentNode.children[0].innerText;
+        if(!clicked.checked) {
+            parent.parentNode.classList.remove('checked');
             let i = checkedItems.indexOf(text);
             checkedItems.splice(i, 1);
             localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
         } else {
-            parent.classList.add('checked');
+            parent.parentNode.classList.add('checked')
             checkedItems.push(text);
             localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
         }
     }
 };
-
 

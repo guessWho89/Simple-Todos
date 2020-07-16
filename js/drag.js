@@ -1,5 +1,3 @@
-var remove = document.querySelector('.draggable');
-
 function dragStart(e) {
     this.style.opacity = '0.4';
     dragSrcEl = this;
