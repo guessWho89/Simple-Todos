@@ -38,7 +38,7 @@ window.onload = () => {
         lis.forEach(li => {
             let item = li.children[0].innerText;
             if (checkedItems.includes(item)) {
-                li.classList.add('checked');                
+                li.classList.add('checked');
             }
         });
         let checked = document.querySelectorAll('.checked');
@@ -51,6 +51,8 @@ window.onload = () => {
 addBtn.onclick = () => {
     if (newItem.value !== '') {
         render();
+        checkLinks(newItem.value) ?
+        document.querySelector('li:last-child .itemText').innerHTML = `<a href="`+newItem.value+`" target="_blank">`+newItem.value+`</a>` : 
         document.querySelector('li:last-child .itemText').innerText = newItem.value;
         allItems.push(newItem.value);
         localStorage.setItem('allItems', JSON.stringify(allItems));
@@ -88,7 +90,7 @@ document.onclick = (e) => {
     // check item
     if (clicked.classList.contains('done')) {
         let text = parent.parentNode.children[0].innerText;
-        if(!clicked.checked) {
+        if (!clicked.checked) {
             parent.parentNode.classList.remove('checked');
             let i = checkedItems.indexOf(text);
             checkedItems.splice(i, 1);
@@ -102,8 +104,19 @@ document.onclick = (e) => {
 };
 
 newItem.onkeyup = (e) => {
-  if (e.keyCode === 13) {
-    e.preventDefault();
-    addBtn.click();
-  }
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        addBtn.click();
+    }
 };
+
+
+const checkLinks = (item) => {
+    let bool = false;
+    const expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+    const regex = new RegExp(expression);
+    if (item.match(regex)) {
+        bool = true;
+    } 
+    return bool;
+}
