@@ -105,6 +105,29 @@ document.onclick = (e) => {
     }
 };
 
+document.ondblclick = (e) => {
+    let clicked = e.target;
+    let parent = e.target.parentNode;
+    let thisText = parent.children[0].innerText;
+    let i = allItems.indexOf(thisText);
+    // edit item
+    if (clicked.classList.contains('itemText')) {
+        parent.classList.add('edit');
+        promptBox('Edit your item..', true);
+        const promptInput = document.querySelector('#promptInput');
+        promptInput.value = thisText;
+    }
+    if (clicked.id === 'promptOk') {
+        const edit = document.querySelector('.edit');
+        let old = edit.children[0].innerText;
+        let num = allItems.indexOf(old);
+        edit.children[0].innerText = promptVal;
+        allItems[num] = promptVal;
+        localStorage.setItem('allItems', JSON.stringify(allItems));
+        edit.classList.remove('edit');
+    }
+}
+
 newItem.onkeyup = (e) => {
     if (e.keyCode === 13) {
         e.preventDefault();
@@ -122,3 +145,4 @@ const checkLinks = (item) => {
     } 
     return bool;
 }
+
