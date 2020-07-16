@@ -28,6 +28,8 @@ window.onload = () => {
         allItems = JSON.parse(localStorage.getItem('allItems'));
         allItems.forEach(item => {
             render();
+            checkLinks(item) ?
+            document.querySelector('li:last-child .itemText').innerHTML = `<a href="`+item+`" target="_blank">`+item+`</a>` : 
             document.querySelector('li:last-child .itemText').innerText = item;
         });
     }
