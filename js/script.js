@@ -19,7 +19,7 @@ const render = () => {
         <button class="btn delItem">&#128465;</button>
     `;
     list.appendChild(li);
-    addEventsDragAndDrop(li);
+    // addEventsDragAndDrop(li);
 }
 
 window.onload = () => {

@@ -26,16 +26,45 @@
         <input type="text" name="newItem" class="newItem" placeholder="Add new item..">
         <button class="btn addItem">Add</button>
     </div>
+
     <div class="box">
         <ol class="list">
         </ol>
+    </div>
+
+    <div class="container">
+        <div>
+            <h3>Sortable List 1</h3>
+            <ul id="list-1" class="sortable">
+                <li>Item 01</li>
+                <li>Item 02</li>
+                <li>Item 03</li>
+                <li>Item 04</li>
+                <li>Item 05</li>
+                <li>Item 06</li>
+            </ul>
+            <button id="sbtn-1" type="button">Serialize</button>
+        </div>
+        <div>
+            <h3>Sortable List 2</h3>
+            <ul id="list-2" class="sortable">
+                <li>Item 07</li>
+                <li>Item 08</li>
+                <li>Item 09</li>
+                <li>Item 10</li>
+                <li>Item 11</li>
+                <li>Item 12</li>
+            </ul>
+            <button id="sbtn-2" type="button">Serialize</button>
+        </div>
     </div>
 
 
     <script src="js/reg-sw.js"></script>
     <script src="js/modals.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/drag.js"></script>
+    <!-- <script src="js/drag.js"></script> -->
+    <script src="js/sortable.js"></script>
 </body>
 
 </html>
