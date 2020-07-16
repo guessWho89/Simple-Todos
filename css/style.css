@@ -88,6 +88,10 @@ li {
     padding: 0px 10px;
 }
 
+.item:nth-child(odd) {
+    background: #f6f6f6;
+}
+
 li button { 
     position: absolute;
     right: 0px;
@@ -96,7 +100,7 @@ li button {
 
 .checked .itemText {
     text-decoration: line-through;
-    background: #eee;
+    opacity: 0.2;
 }
 
 .done {
