@@ -84,8 +84,8 @@ li {
 .itemText {
     display: block;
     width: calc(100% - 110px);
-    line-height: 40px;
-    padding: 0px 10px;
+    min-height: 40px;
+    padding: 10px;
 }
 
 .item:nth-child(odd) {
