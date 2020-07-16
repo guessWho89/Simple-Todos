@@ -101,3 +101,9 @@ document.onclick = (e) => {
     }
 };
 
+newItem.onkeyup = (e) => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    addBtn.click();
+  }
+};
