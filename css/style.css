@@ -14,7 +14,7 @@
 
 a {
     color: var(--blue);
-    word-wrap: break-all;
+    word-break: break-all;
 }
 
 .box { 
