@@ -239,3 +239,4 @@ function initSortable(list, sbtn) {
 // init lists 
 initSortable('list-1');
 initSortable('list-2');
+initSortable('list-3');

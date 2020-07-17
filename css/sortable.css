@@ -55,6 +55,7 @@ ul.sortable {
     padding: 5px;
 }
 
+/* ol.sortable>li, */
 ul.sortable>li {
     display: block;
     margin: 1px;
@@ -64,14 +65,17 @@ ul.sortable>li {
     background: #fff;
 }
 
+ol.sortable>li:hover,
 ul.sortable>li:hover {
     background: #ffffe0;
 }
 
+ol.sortable>li.active,
 ul.sortable>li.active {
     background: #ccc;
 }
 
+ol.sortable>li.dragging,
 ul.sortable>li.dragging {
     background: #e0ffff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
