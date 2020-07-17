@@ -84,6 +84,8 @@ document.onclick = (e) => {
         const edit = document.querySelector('.edit');
         let old = edit.children[0].innerText;
         let num = allItems.indexOf(old);
+        checkLinks(promptVal) ?
+        edit.children[0].innerHTML = `<a href="`+promptVal+`" target="_blank">`+promptVal+`</a>` : 
         edit.children[0].innerText = promptVal;
         allItems[num] = promptVal;
         localStorage.setItem('allItems', JSON.stringify(allItems));
