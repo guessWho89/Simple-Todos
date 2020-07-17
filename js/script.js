@@ -19,7 +19,7 @@ const render = () => {
         <button class="btn delItem">&#128465;</button>
     `;
     list.appendChild(li);
-    // addEventsDragAndDrop(li);
+    addEventsDragAndDrop(li);
 }
 
 window.onload = () => {
@@ -29,8 +29,8 @@ window.onload = () => {
         allItems.forEach(item => {
             render();
             checkLinks(item) ?
-            document.querySelector('li:last-child .itemText').innerHTML = `<a href="`+item+`" target="_blank">`+item+`</a>` : 
-            document.querySelector('li:last-child .itemText').innerText = item;
+                document.querySelector('li:last-child .itemText').innerHTML = `<a href="` + item + `" target="_blank">` + item + `</a>` :
+                document.querySelector('li:last-child .itemText').innerText = item;
         });
     }
     // get checked items
@@ -54,8 +54,8 @@ addBtn.onclick = () => {
     if (newItem.value !== '') {
         render();
         checkLinks(newItem.value) ?
-        document.querySelector('li:last-child .itemText').innerHTML = `<a href="`+newItem.value+`" target="_blank">`+newItem.value+`</a>` : 
-        document.querySelector('li:last-child .itemText').innerText = newItem.value;
+            document.querySelector('li:last-child .itemText').innerHTML = `<a href="` + newItem.value + `" target="_blank">` + newItem.value + `</a>` :
+            document.querySelector('li:last-child .itemText').innerText = newItem.value;
         allItems.push(newItem.value);
         localStorage.setItem('allItems', JSON.stringify(allItems));
         newItem.value = '';
@@ -85,8 +85,8 @@ document.onclick = (e) => {
         let old = edit.children[0].innerText;
         let num = allItems.indexOf(old);
         checkLinks(promptVal) ?
-        edit.children[0].innerHTML = `<a href="`+promptVal+`" target="_blank">`+promptVal+`</a>` : 
-        edit.children[0].innerText = promptVal;
+            edit.children[0].innerHTML = `<a href="` + promptVal + `" target="_blank">` + promptVal + `</a>` :
+            edit.children[0].innerText = promptVal;
         allItems[num] = promptVal;
         localStorage.setItem('allItems', JSON.stringify(allItems));
         edit.classList.remove('edit');
@@ -144,7 +144,8 @@ const checkLinks = (item) => {
     const regex = new RegExp(expression);
     if (item.match(regex)) {
         bool = true;
-    } 
+    }
     return bool;
 }
+
 
