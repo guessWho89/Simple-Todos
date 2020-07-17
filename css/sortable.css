@@ -1,26 +1,26 @@
-*,
+/* *,
 *:before,
 *:after {
     box-sizing: border-box;
     -webkit-transition: background-color 400ms ease-out, border-color 400ms ease-out, color 400ms ease-out;
     transition: background-color 400ms ease-out, border-color 400ms ease-out, color 400ms ease-out;
 }
-
-html,
+ */
+/* html,
 body {
     display: block;
     height: 100%;
-}
+} */
 
-body {
+/* body {
     overflow: hidden;
     overflow-y: scroll;
     font-family: Arial, sans-serif;
     background: #fcfff4;
     background: radial-gradient(ellipse at center, #fcfff4 0%, #dfe5d7 50%, #b3bead 100%);
-}
+} */
 
-.container {
+/* .container {
     display: -webkit-box;
     display: flex;
     -webkit-box-orient: horizontal;
@@ -33,17 +33,17 @@ body {
     height: 100%;
     max-width: 800px;
     margin: 0 auto;
-}
+} */
 
-.container div {
+/* .container div {
     flex-basis: 40%;
-}
+} */
 
-.container div h3 {
+/* .container div h3 {
     font-weight: bold;
     font-size: 150%;
     line-height: 1em;
-}
+} */
 
 ul.sortable {
     display: block;

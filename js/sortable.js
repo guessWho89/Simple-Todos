@@ -234,13 +234,8 @@ function initSortable(list, sbtn) {
    var listObj = document.getElementById(list),
       sbtnObj = document.getElementById(sbtn),
       sortable = new Sortable(listObj);
-
-   sbtnObj.addEventListener("click", function (e) {
-      e.preventDefault();
-      alert(sortable.toString());
-   });
 }
 
 // init lists 
-initSortable("list-1", "sbtn-1");
-initSortable("list-2", "sbtn-2");
+initSortable('list-1');
+initSortable('list-2');

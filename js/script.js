@@ -19,7 +19,7 @@ const render = () => {
         <button class="btn delItem">&#128465;</button>
     `;
     list.appendChild(li);
-    addEventsDragAndDrop(li);
+    // addEventsDragAndDrop(li);
 }
 
 window.onload = () => {
@@ -33,7 +33,10 @@ window.onload = () => {
                 document.querySelector('li:last-child .itemText').innerText = item;
         });
     }
-    // get checked items
+    getChecked();
+};
+
+const getChecked = () => {
     if (localStorage.getItem('checkedItems') !== null) {
         checkedItems = JSON.parse(localStorage.getItem('checkedItems'));
         let lis = document.querySelectorAll('li');
@@ -41,14 +44,15 @@ window.onload = () => {
             let item = li.children[0].innerText;
             if (checkedItems.includes(item)) {
                 li.classList.add('checked');
+                li.children[1].children[0].checked = true;
             }
         });
-        let checked = document.querySelectorAll('.checked');
-        checked.forEach(el => {
-            el.children[1].children[0].setAttribute('checked', true);
-        });
+        // let checked = document.querySelectorAll('.checked');
+        // checked.forEach(el => {
+        //     el.children[1].children[0].setAttribute('checked', true);
+        // });
     }
-};
+}
 
 addBtn.onclick = () => {
     if (newItem.value !== '') {
