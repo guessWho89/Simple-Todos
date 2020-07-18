@@ -7,7 +7,7 @@ let checkedItems = [];
 
 const render = () => {
     const li = document.createElement('li');
-    li.classList.add('item', 'draggable');
+    li.classList.add('item');
     li.setAttribute('draggable', 'true');
     li.innerHTML = `
         <span class="itemText"></span>
@@ -19,7 +19,9 @@ const render = () => {
         <button class="btn delItem">&#128465;</button>
     `;
     list.appendChild(li);
-    // addEventsDragAndDrop(li);
+    addEventsDragAndDrop(li);
+    init();
+    // initSortable('list-1');
 }
 
 window.onload = () => {
@@ -47,10 +49,6 @@ const getChecked = () => {
                 li.children[1].children[0].checked = true;
             }
         });
-        // let checked = document.querySelectorAll('.checked');
-        // checked.forEach(el => {
-        //     el.children[1].children[0].setAttribute('checked', true);
-        // });
     }
 }
 

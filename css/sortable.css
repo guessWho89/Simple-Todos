@@ -61,7 +61,7 @@ ul.sortable>li {
     margin: 1px;
     padding: 10px;
     border-radius: 4px;
-    cursor: move;
+    cursor: grab;
     background: #fff;
 }
 

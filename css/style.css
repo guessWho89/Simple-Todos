@@ -20,7 +20,6 @@ a {
 .box { 
     padding: 20px;
     margin: auto;
-    /* border-bottom: 1px solid #ccc; */
 }
 
 .flex { 
@@ -37,16 +36,12 @@ a {
     cursor: pointer;
 }
 
-.itemText { 
-    cursor: pointer;
-}
-
-.addItem {
+button.addItem {
     background: var(--green);
     font-weight: bold;
 }
 
-.delItem {
+button.delItem {
     font-size: 32px;
     color: var(--pink);
     background: transparent;
@@ -58,7 +53,7 @@ a {
     font-weight: bold;
 }
 
-.editItem {
+button.editItem {
     right: 40px;
     background: transparent;
     color: var(--blue);
@@ -68,7 +63,7 @@ a {
     line-height: 30px;
 }
 
-input {
+input.newItem {
     border: none;
     outline: none;
     border-bottom: 1px solid #ccc;
@@ -77,24 +72,29 @@ input {
     width: 100%;
 }
 
-ol {
+ol.list {
     padding-left: 20px;
 }
 
-li {
+li.item {
     margin-bottom: 5px;
     position: relative;
 }
 
-.itemText {
+li.item:nth-child(odd) {
+    background: #f6f6f6;
+}
+
+span.itemText {
     display: block;
     width: calc(100% - 110px);
     min-height: 40px;
     padding: 10px;
+    cursor: grab;
 }
 
-.item:nth-child(odd) {
-    background: #f6f6f6;
+ol.list>li.item { 
+    cursor: grab;
 }
 
 li button { 
@@ -149,4 +149,13 @@ li button {
     left: 0px;
     font-size: 30px;
     color: var(--green);
+}
+
+ol.list>li.over {
+    background: #ccc;
+    /* box-shadow: 0 0 5px #ccc; */
+}
+
+.grabbed {
+    cursor: grabbing;
 }

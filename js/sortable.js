@@ -143,6 +143,7 @@
          this._dragItem = document.createElement(item.tagName);
          this._dragItem.className = "dragging";
          this._dragItem.innerHTML = item.innerHTML;
+         this._dragItem.style["cursor"] = "grabbing";
          this._dragItem.style["position"] = "absolute";
          this._dragItem.style["z-index"] = "999";
          this._dragItem.style["left"] = (item.offsetLeft || 0) + "px";

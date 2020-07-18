@@ -30,16 +30,6 @@ function dragDrop(e) {
 }
 
 function dragEnd(e) {
-    // var listItems = document.querySelectorAll('.draggable');
-    // [].forEach.call(listItems, function (item) {
-    //     let text = item.children[0].innerText;
-    //     item.children[1].children[0].checked = false;
-    //     item.classList.remove('over', 'checked');
-    //     if(checkedItems.includes(text)) {
-    //         item.classList.add('checked');
-    //         item.children[1].children[0].checked = true;
-    //     }
-    // });
     let lis = document.querySelectorAll('li');
     lis.forEach(li => {
         let item = li.children[0].innerText;
@@ -62,10 +52,10 @@ function addEventsDragAndDrop(el) {
     el.addEventListener('dragend', dragEnd, false);
 }
 
-var listItems = document.querySelectorAll('.draggable');
-[].forEach.call(listItems, function (item) {
-    addEventsDragAndDrop(item);
-});
+// let lis = document.querySelectorAll('.items');
+// lis.forEach(li => {
+//     addEventsDragAndDrop(li);
+// });
 
 function reorderSave() {
     let lis = document.querySelectorAll('li');
@@ -80,24 +70,24 @@ function reorderSave() {
 }
 
 
-// function touchHandler(event) {
-//     var touch = event.changedTouches[0];
-//     var simulatedEvent = document.createEvent("MouseEvent");
-//         simulatedEvent.initMouseEvent({
-//         touchstart: "mousedown",
-//         touchmove: "mousemove",
-//         touchend: "mouseup"
-//     }[event.type], true, true, window, 1,
-//         touch.screenX, touch.screenY,
-//         touch.clientX, touch.clientY, false,
-//         false, false, false, 0, null);
-//     touch.target.dispatchEvent(simulatedEvent);
-//     event.preventDefault();
-// }
+function touchHandler(event) {
+    var touch = event.changedTouches[0];
+    var simulatedEvent = document.createEvent("MouseEvent");
+        simulatedEvent.initMouseEvent({
+        touchstart: "mousedown",
+        touchmove: "mousemove",
+        touchend: "mouseup"
+    }[event.type], true, true, window, 1,
+        touch.screenX, touch.screenY,
+        touch.clientX, touch.clientY, false,
+        false, false, false, 0, null);
+    touch.target.dispatchEvent(simulatedEvent);
+    event.preventDefault();
+}
 
-// function init() {
-//     document.addEventListener("touchstart", touchHandler, true);
-//     document.addEventListener("touchmove", touchHandler, true);
-//     document.addEventListener("touchend", touchHandler, true);
-//     document.addEventListener("touchcancel", touchHandler, true);
-// }init();
+function init() {
+    document.addEventListener("touchstart", touchHandler, true);
+    document.addEventListener("touchmove", touchHandler, true);
+    document.addEventListener("touchend", touchHandler, true);
+    document.addEventListener("touchcancel", touchHandler, true);
+}
