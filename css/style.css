@@ -65,8 +65,8 @@ button.addItem {
 
 img.delItem,
 img.editItem {
-    width: 40px;
-    padding: 8px;
+    width: 30px;
+    padding: 8px 2px;
     position: absolute;
     right: 0;
     top: 50%;
@@ -75,7 +75,7 @@ img.editItem {
 }
 
 img.editItem {
-    right: 40px;
+    right: 30px;
 }
 
 input.newItem {
@@ -102,7 +102,7 @@ li.item:nth-child(odd) {
 
 span.itemText {
     display: block;
-    width: calc(100% - 110px);
+    width: calc(100% - 90px);
     min-height: 40px;
     padding: 10px;
     cursor: grab;
@@ -125,9 +125,9 @@ ol.list>li.item {
 
 .doneLabel {
     position: absolute;
-    right: 80px;
+    right: 60px;
     top: 0;
-    width: 40px;
+    width: 30px;
     height: 40px;
 }
 
