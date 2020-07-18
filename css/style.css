@@ -41,7 +41,7 @@ button.addItem {
     font-weight: bold;
 }
 
-button.delItem {
+/* button.delItem {
     font-size: 32px;
     color: var(--pink);
     background: transparent;
@@ -51,9 +51,9 @@ button.delItem {
     padding: 0px;
     text-align: center;
     font-weight: bold;
-}
+} */
 
-button.editItem {
+/* button.editItem {
     right: 40px;
     background: transparent;
     color: var(--blue);
@@ -61,6 +61,26 @@ button.editItem {
     height: 40px;
     padding: 0;
     line-height: 30px;
+} */
+
+button.delItem,
+button.editItem {
+    width: 30px;
+    height: 40px;
+    padding: 0;
+    font-size: x-large;
+    position: absolute;
+    background: transparent;
+}
+
+button.delItem {
+    color: var(--pink);
+    top: -2px;
+}
+
+button.editItem {
+    color: var(--blue);
+    right: 30px;
 }
 
 input.newItem {
@@ -116,8 +136,10 @@ li button {
 
 .doneLabel {
     position: absolute;
-    right: 80px;
+    right: 60px;
     top: -8px;
+    width: 30px;
+    height: 40px;
 }
 
 .checkBox {

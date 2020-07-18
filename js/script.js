@@ -15,8 +15,8 @@ const render = () => {
             <input type="checkbox" name="done" class="done">
             <span class="checkBox"></span>
         </label>
-        <button class="btn editItem">&#9998;</button>
-        <button class="btn delItem">&#128465;</button>
+        <button class="btn editItem"><i class="fa fa-edit"></i></button>
+        <button class="btn delItem"><i class="fa fa-trash"></i></button>
     `;
     list.appendChild(li);
     addEventsDragAndDrop(li);
