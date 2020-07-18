@@ -20,7 +20,7 @@ const render = () => {
     `;
     list.appendChild(li);
     addEventsDragAndDrop(li);
-    init();
+    // init();
     // initSortable('list-1');
 }
 
