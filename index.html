@@ -9,7 +9,6 @@
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/banner.css">
-    <link rel="stylesheet" href="css/sortable.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="sw.js"></script>
 </head>
@@ -29,23 +28,17 @@
         <button class="btn addItem">Add</button>
     </div>
 
-    <div class="box">
-        <ol class="list sortable" id="list-1">
-        </ol>
-        <!-- <ul id="list-2" class="sortable">
-            <li>Item 01</li>
-            <li>Item 02</li>
-            <li>Item 03</li>
-            <li>Item 04</li>
-            <li>Item 05</li>
-        </ul>
-        <ul id="list-3" class="sortable">
-            <li>Item 07</li>
-            <li>Item 08</li>
-            <li>Item 09</li>
-            <li>Item 10</li>
-            <li>Item 11</li>
-        </ul> -->
+    <div class="box listsPanel">
+        <!-- <h3>list-1</h3>
+        <div class="listHolder list-1Holder">
+            <ol class="list" id="list-1">
+            </ol>
+        </div> -->
+    </div>
+
+    <div class="newListBtnHolder">
+        <button class="btn newList">&plus;</button>
+        <p class="newListText">Add new list..</p>
     </div>
 
 
@@ -53,9 +46,9 @@
     <script src="js/include.js"></script>
     <script src="js/reg-sw.js"></script>
     <script src="js/modals.js"></script>
-    <script src="js/script.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+    <script src="js/script2.js"></script>
     <script src="js/drag.js"></script>
-    <!-- <script src="js/sortable.js"></script> -->
 </body>
 
 </html>

@@ -2,8 +2,11 @@ const newItem = document.querySelector('.newItem');
 const addBtn = document.querySelector('.addItem');
 const delBtn = document.querySelectorAll('.delItem');
 const list = document.querySelector('.list');
+let lists = [];
 let allItems = [];
 let checkedItems = [];
+const storeData = (name, val) => localStorage.setItem(name, JSON.stringify(val));
+const readData = (name) => JSON.parse(localStorage.getItem(name));
 
 const render = () => {
     const li = document.createElement('li');
@@ -18,10 +21,9 @@ const render = () => {
         <button class="editItem"></button>
         <button class="delItem"></button>
     `;
-    list.appendChild(li);
+    const newList = document.querySelector('.list');
+    newList.appendChild(li);
     addEventsDragAndDrop(li);
-    // init();
-    // initSortable('list-1');
 }
 
 window.onload = () => {
@@ -82,7 +84,7 @@ document.onclick = (e) => {
         const promptInput = document.querySelector('#promptInput');
         promptInput.value = thisText;
     }
-    if (clicked.id === 'promptOk') {
+    if (clicked.id === 'promptOk' && document.getElementsByClassName('edit')[0] !== undefined) {
         const edit = document.querySelector('.edit');
         let old = edit.children[0].innerText;
         let num = allItems.indexOf(old);
@@ -106,6 +108,23 @@ document.onclick = (e) => {
             checkedItems.push(text);
             localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
         }
+    }
+    // add new list
+    if (clicked.id === 'promptOk' && document.getElementsByClassName('addingNewList')[0] !== undefined) {
+        const promptInput = document.querySelector('#promptInput');
+        const listHolder = document.createElement('div');
+        let classOrId = promptInput.value.replace(/\s/g, '');
+        listHolder.classList.add('listHolder', classOrId + 'Holder');
+        const ol = `
+            <h3>` + promptInput.value + `</h3>
+            <ol class="list" id="` + classOrId + `">
+            </ol>
+        `;
+        listHolder.innerHTML = ol;
+        const listPanel = document.querySelector('.listsPanel')
+        listPanel.insertBefore(listHolder, listPanel.firstChild);
+        lists.push(classOrId);
+        storeData('lists', lists);
     }
 };
 
@@ -150,4 +169,20 @@ const checkLinks = (item) => {
     return bool;
 }
 
+const newListBtn = document.querySelector('.newList');
+newListBtn.onclick = () => {
+    promptBox('Name your new list:', true, 'New list name');
+    const promptModal = document.getElementById('promptBox');
+    promptModal.classList.add('addingNewList');
+}
 
+let allLists = {
+    list1: {
+        item: {
+            title: 'test', 
+            description: 'lorem ipsum text',
+            checked: false
+        }
+    },
+    list2: {},
+};

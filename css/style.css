@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Verdana, serif;
+    outline: none;
 }
 
 :root {
@@ -41,41 +42,25 @@ button.addItem {
     font-weight: bold;
 }
 
-/* button.delItem {
-    font-size: 32px;
-    color: var(--pink);
-    background: transparent;
+button.delItem, 
+button.editItem {
     height: 40px;
-    width: 38px;
-    line-height: 35px;
-    padding: 0px;
-    text-align: center;
-    font-weight: bold;
-} */
-
-/* button.editItem {
-    right: 40px;
-    background: transparent;
-    color: var(--blue);
-    font-size: 32px;
-    height: 40px;
-    padding: 0;
-    line-height: 30px;
-} */
-
-img.delItem,
-img.editItem {
     width: 30px;
-    padding: 8px 2px;
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    border: none;
 }
 
-img.editItem {
+button.editItem {
+    background: url(../img/edit.png) center center/23px no-repeat;
     right: 30px;
+}
+
+button.delItem {
+    background: url(../img/trash.png) center center/22px no-repeat;
 }
 
 input.newItem {
@@ -88,16 +73,23 @@ input.newItem {
 }
 
 ol.list {
-    padding-left: 20px;
+    box-shadow: 0 5px 30px 5px #ccc;
+    border: 1px solid #ccc;
+    /* -webkit-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14),0 9px 46px 8px rgba(0,0,0,0.12),0 11px 15px -7px rgba(0,0,0,0.2);
+    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2); */
+    margin: 5px auto 30px;
+    min-height: 40px;
 }
 
 li.item {
-    margin-bottom: 5px;
     position: relative;
+    border-bottom: 1px solid #ccc;
+    list-style-type: none;
 }
 
-li.item:nth-child(odd) {
-    background: #f6f6f6;
+li.item:last-child {
+    border-bottom: none;
 }
 
 span.itemText {
@@ -142,7 +134,7 @@ ol.list>li.item {
     line-height: 1;
     padding: 0;
     display: block;
-    position: relative;
+    position: absolute;
     bottom: 10px;
     margin: auto;
 }
@@ -172,3 +164,37 @@ ol.list>li.over {
 .grabbed {
     cursor: grabbing;
 }
+
+div.newListBtnHolder {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+}
+
+button.newList {
+    display: block;
+    margin: auto;
+    background: var(--gray);
+    opacity: 0.5;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 0;
+    margin-bottom: 5px;
+    transition: 0.3s;
+    line-height: 1;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+}
+
+button.newList:hover {
+    opacity: 0.8;
+}
+
+p.newListText {
+    text-align: center;
+    font-size: 14px;
+}
+
