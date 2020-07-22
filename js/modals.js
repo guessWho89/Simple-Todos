@@ -183,7 +183,16 @@ const promptBox = (msg, bool, val) => {
             }, 290);
         }
     });
-    
+
+    document.onkeydown = (e) => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            promptOk.click();
+        } else if (e.keyCode === 27) {
+            e.preventDefault();
+            promptCancel.click();
+        }
+    }
 }
 
 const alertBox = (msg) => {
@@ -234,4 +243,11 @@ const alertBox = (msg) => {
             alertHolder.remove();
         }, 290);
     });
+
+    document.onkeydown = (e) => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            promptOk.click();
+        } 
+    }
 }

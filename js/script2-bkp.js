@@ -2,25 +2,67 @@ const newItem = document.querySelector('.newItem');
 const addBtn = document.querySelector('.addItem');
 const delBtn = document.querySelectorAll('.delItem');
 const list = document.querySelector('.list');
-const listsPanel = document.querySelector('.listsPanel');
 let allLists = [];
 let allItems = [];
 let checkedItems = [];
 const setData = (name, val) => localStorage.setItem(name, JSON.stringify(val));
 const getData = (name) => JSON.parse(localStorage.getItem(name));
 
-const newListBtn = document.querySelector('.newList');
-newListBtn.onclick = () => {
-    promptBox('Name your new list:', true, 'New list name');
-    const promptModal = document.getElementById('promptBox');
-    promptModal.classList.add('addingNewList');
+const render = () => {
+    const li = document.createElement('li');
+    li.classList.add('item');
+    li.setAttribute('draggable', 'true');
+    li.innerHTML = `
+        <span class="itemText"></span>
+        <label class="doneLabel">
+            <input type="checkbox" name="done" class="done">
+            <span class="checkBox"></span>
+        </label>
+        <button class="editItem"></button>
+        <button class="delItem"></button>
+    `;
+    const newList = document.querySelector('.list');
+    newList.appendChild(li);
+    addEventsDragAndDrop(li);
+}
+
+window.onload = () => {
+    // get all items
+    if (localStorage.getItem('allItems') !== null) {
+        allItems = JSON.parse(localStorage.getItem('allItems'));
+        allItems.forEach(item => {
+            render();
+            checkLinks(item) ?
+                document.querySelector('li:last-child .itemText').innerHTML = `<a href="` + item + `" target="_blank">` + item + `</a>` :
+                document.querySelector('li:last-child .itemText').innerText = item;
+        });
+    }
+    getChecked();
+};
+
+const getChecked = () => {
+    if (localStorage.getItem('checkedItems') !== null) {
+        checkedItems = JSON.parse(localStorage.getItem('checkedItems'));
+        let lis = document.querySelectorAll('li');
+        lis.forEach(li => {
+            let item = li.children[0].innerText;
+            if (checkedItems.includes(item)) {
+                li.classList.add('checked');
+                li.children[1].children[0].checked = true;
+            }
+        });
+    }
 }
 
 addBtn.onclick = () => {
     if (newItem.value !== '') {
-        renderItems();
-        checkLinks(newItem.value);
-        setData('allItems', allItems);
+        render();
+        checkLinks(newItem.value) ?
+            document.querySelector('li:last-child .itemText').innerHTML = `<a href="` + newItem.value + `" target="_blank">` + newItem.value + `</a>` :
+            document.querySelector('li:last-child .itemText').innerText = newItem.value;
+        allItems.push(newItem.value);
+        localStorage.setItem('allItems', JSON.stringify(allItems));
+        newItem.value = '';
     }
 };
 
@@ -32,7 +74,7 @@ document.onclick = (e) => {
     // delete item
     if (clicked.classList.contains('delItem')) {
         allItems.splice(i, 1);
-        setData('allItems', allItems);
+        localStorage.setItem('allItems', JSON.stringify(allItems));
         parent.remove();
     }
     // edit item
@@ -50,7 +92,7 @@ document.onclick = (e) => {
             edit.children[0].innerHTML = `<a href="` + promptInput.value + `" target="_blank">` + promptInput.value + `</a>` :
             edit.children[0].innerText = promptInput.value;
         allItems[num] = promptInput.value;
-        setData('allItems', allItems);
+        localStorage.setItem('allItems', JSON.stringify(allItems));
         edit.classList.remove('edit');
     }
     // check item
@@ -60,11 +102,11 @@ document.onclick = (e) => {
             parent.parentNode.classList.remove('checked');
             let i = checkedItems.indexOf(text);
             checkedItems.splice(i, 1);
-            setData('checkedItems', checkedItems);
+            localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
         } else {
             parent.parentNode.classList.add('checked')
             checkedItems.push(text);
-            setData('checkedItems', checkedItems);
+            localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
         }
     }
     // add new list
@@ -79,9 +121,10 @@ document.onclick = (e) => {
             </ol>
         `;
         listHolder.innerHTML = ol;
-        listsPanel.insertBefore(listHolder, listsPanel.firstChild);
+        const listPanel = document.querySelector('.listsPanel')
+        listPanel.insertBefore(listHolder, listPanel.firstChild);
         allLists.push(classOrId);
-        setData('allLists', allLists);
+        setData(classOrId, allLists);
     }
 };
 
@@ -115,82 +158,21 @@ newItem.onkeyup = (e) => {
     }
 };
 
-const renderItems = () => {
-    const li = document.createElement('li');
-    li.classList.add('item');
-    li.setAttribute('draggable', 'true');
-    li.innerHTML = `
-        <span class="itemText"></span>
-        <label class="doneLabel">
-            <input type="checkbox" name="done" class="done">
-            <span class="checkBox"></span>
-        </label>
-        <button class="editItem"></button>
-        <button class="delItem"></button>
-    `;
-    const newList = document.querySelector('.list');
-    newList.appendChild(li);
-    addEventsDragAndDrop(li);
-}
-
-const renderLists = () => {
-    const listHolder = document.createElement('div');
-    listHolder.classList.add('listHolder');
-    listHolder.innerHTML = `
-        <h3></h3>
-        <ol class="list">
-        </ol>
-    `;
-    listsPanel.insertBefore(listHolder, listsPanel.firstChild);
-}
-
-const getChecked = () => {
-    if (getData('checkedItems') !== null) {
-        checkedItems = getData('checkedItems');
-        let lis = document.querySelectorAll('li');
-        lis.forEach(li => {
-            let item = li.children[0].innerText;
-            if (checkedItems.includes(item)) {
-                li.classList.add('checked');
-                li.children[1].children[0].checked = true;
-            }
-        });
-    }
-}
 
 const checkLinks = (item) => {
+    let bool = false;
     const expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
     const regex = new RegExp(expression);
-    let lastItemText = document.querySelector('li:last-child .itemText');
     if (item.match(regex)) {
-        lastItemText.innerHTML = `<a href="` + item + `" target="_blank">` + item + `</a>`;
-    }else {
-        lastItemText.innerText = item;
+        bool = true;
     }
-    allItems.push(item);
-    newItem.value = '';
+    return bool;
 }
 
-window.onload = () => {
-    // get all lists 
-    if (getData('allLists') !== null) {
-        allLists = getData('allLists');
-        allLists.forEach(list => {
-            renderLists();
-            document.querySelector('.listHolder:first-child').classList.add(list + 'Holder');
-            document.querySelector('.listHolder:first-child .list').id = list;
-            document.querySelector('.listHolder:first-child h3').innerText = list;
-            console.log(list);
-        });
-    }
-    // get all items
-    if (getData('allItems') !== null) {
-        allItems = getData('allItems');
-        allItems.forEach(item => {
-            renderItems();
-            checkLinks(item);
-        });
-    }
-    getChecked();
-};
+const newListBtn = document.querySelector('.newList');
+newListBtn.onclick = () => {
+    promptBox('Name your new list:', true, 'New list name');
+    const promptModal = document.getElementById('promptBox');
+    promptModal.classList.add('addingNewList');
+}
 
