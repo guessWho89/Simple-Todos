@@ -187,10 +187,10 @@ const promptBox = (msg, bool, val) => {
     document.onkeydown = (e) => {
         if (e.keyCode === 13) {
             e.preventDefault();
-            promptOk.click();
+            document.querySelector('#promptOk').click();
         } else if (e.keyCode === 27) {
             e.preventDefault();
-            promptCancel.click();
+            document.querySelector('#promptCancel').click();
         }
     }
 }
@@ -247,7 +247,7 @@ const alertBox = (msg) => {
     document.onkeydown = (e) => {
         if (e.keyCode === 13) {
             e.preventDefault();
-            promptOk.click();
+            alertOk.click();
         } 
     }
 }

@@ -6,6 +6,11 @@
     outline: none;
 }
 
+li.item::marker {
+    position: relative;
+    left: 20px;
+}
+
 :root {
     --blue: #00b4eb;
     --pink: #e22b4c;
@@ -37,13 +42,27 @@ a {
     cursor: pointer;
 }
 
+div.newItemBox {
+    position: fixed;
+    background: #fff;
+    box-shadow: 0 5px 30px 5px #ccc;
+    z-index: 9;
+    width: 100%;
+}
+
+div.listsPanel {
+    margin-top: 40px;
+}
+
 button.addItem {
     background: var(--green);
     font-weight: bold;
+    /* border-bottom: 1px solid #ccc; */
 }
 
 button.delItem, 
-button.editItem {
+button.editItem,
+button.delList {
     height: 40px;
     width: 30px;
     position: absolute;
@@ -59,14 +78,21 @@ button.editItem {
     right: 30px;
 }
 
-button.delItem {
+button.delItem,
+button.delList {
     background: url(../img/trash.png) center center/22px no-repeat;
+}
+
+button.delList {
+    height: 40px;
+    top: 0px;
+    transform: translateY(0);
 }
 
 input.newItem {
     border: none;
     outline: none;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
     padding: 10px;
     font-size: 14px;
     width: 100%;
@@ -75,10 +101,7 @@ input.newItem {
 ol.list {
     box-shadow: 0 5px 30px 5px #ccc;
     border: 1px solid #ccc;
-    /* -webkit-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
-    -ms-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14),0 9px 46px 8px rgba(0,0,0,0.12),0 11px 15px -7px rgba(0,0,0,0.2);
-    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2); */
-    margin: 5px auto 30px;
+    margin: 0px auto 30px;
     min-height: 40px;
 }
 
@@ -166,7 +189,7 @@ ol.list>li.over {
 }
 
 div.newListBtnHolder {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -198,3 +221,20 @@ p.newListText {
     font-size: 14px;
 }
 
+div.listTitle {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background: #eee;
+    cursor: pointer;
+    height: 44px;
+}
+
+div.listTitle h3 {
+    height: 0;
+}
+
+.selected {
+    outline: 2px solid var(--blue);
+}
