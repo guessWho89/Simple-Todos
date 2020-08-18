@@ -109,6 +109,7 @@ document.onclick = (e) => {
         document.querySelector('.listHolder .list').id = classOrId;
         allLists.push(classOrId);
         setData('allLists', allLists);
+        setData(classOrId, []);
         selectList();
     }
     // delete list 
@@ -163,8 +164,6 @@ const editItem = () => {
     let edited = checkLinks(promptInput.value);
     edit.children[0].innerHTML = edited;
     setData(currentList, currentListItems);
-    console.log(currentList);
-    console.log(currentListItems);
     edit.classList.remove('edit');  
 }
 
