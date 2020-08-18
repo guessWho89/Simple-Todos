@@ -1,41 +1,67 @@
 const newItem = document.querySelector('.newItem');
-const addItemBtn = document.querySelector('.addItem');
+const addBtn = document.querySelector('.addItem');
 const delBtn = document.querySelectorAll('.delItem');
 const list = document.querySelector('.list');
 const listsPanel = document.querySelector('.listsPanel');
 const newListBtn = document.querySelector('.newList');
-let allLists = [];
-let allItems = [];
-let checkedItems = [];
-let selectedList;
-let selectedListItems = [];
-let currentList;
-let currentListItems = [];
-let listToRmvFrom = [];
-
-
+// let allLists = [];
+// let allItems = [];
+// let checkedItems = [];
 const setData = (name, val) => localStorage.setItem(name, JSON.stringify(val));
 const getData = (name) => JSON.parse(localStorage.getItem(name));
-
+let db = [
+    {   
+        list: 'list1',
+        items: [
+            {
+                name: 'item1',
+                desc: 'text',
+                checked: false
+            },
+            {
+                name: 'item2',
+                desc: 'text',
+                checked: true
+            },
+        ]
+    },
+    {
+        list: 'list2',
+        items: [
+            {
+                name: 'item3',
+                desc: 'text',
+                checked: true
+            },
+            {
+                title: 'item4',
+                desc: 'text',
+                checked: false
+            },
+        ]
+    }
+]
 
 window.onload = () => {
     // get all lists 
-    let collection = {};
     if (getData('allLists') !== null) {
         allLists = getData('allLists');
         allLists.forEach(list => {
             renderLists();
-            document.querySelector('.listHolder').classList.add(list + 'Holder', 'selected');
-            document.querySelector('.listHolder .list').id = list;
-            document.querySelector('.listHolder h3').innerText = list;
-            collection[list] = [getData(list)];
-            collection[list][0].forEach(item => {
-                renderItems(item);
-            });
+            document.querySelector('.listHolder:first-child').classList.add(list + 'Holder');
+            document.querySelector('.listHolder:first-child .list').id = list;
+            document.querySelector('.listHolder:first-child h3').innerText = list;
+        });
+    }
+    // get all items
+    if (getData('db') !== null) {
+        allItems = getData('allItems');
+        allItems.forEach(item => {
+            renderItems(item);
         });
     }
     getChecked();
-    selectList();
+    selectedList();
 };
 
 newListBtn.onclick = () => {
@@ -44,25 +70,20 @@ newListBtn.onclick = () => {
     promptModal.classList.add('addingNewList');
 }
 
-
-addItemBtn.onclick = () => {
-    if (newItem.value !== '' && getData('allLists') !== null && getData('allLists')[0] !== undefined) {
-        selectedList = document.querySelector('.selected').children[1].id;
-        selectedListItems = getData(selectedList);
-        selectedListItems.push(newItem.value);
-        setData(selectedList, selectedListItems);
-        setData('selected', selectedList);
+addBtn.onclick = () => {
+    if (newItem.value !== '') {
+        // let listName = document.querySelector('.selected').children[1].id;
         renderItems(newItem.value);
+        allItems.push(newItem.value);
+        setData('allItems', allItems);
         newItem.value = '';
-    } else {
-        newListBtn.click();
     }
 };
 
 newItem.onkeyup = (e) => {
     if (e.keyCode === 13) {
         e.preventDefault();
-        addItemBtn.click();
+        addBtn.click();
     }
 };
 
@@ -70,12 +91,12 @@ document.onclick = (e) => {
     let clicked = e.target;
     let parent = e.target.parentNode;
     let thisText = parent.children[0].innerText;
+    let i = allItems.indexOf(thisText);
     // delete item
     if (clicked.classList.contains('delItem')) {
-        currentList = parent.parentNode.id;
-        currentListItems = getData(currentList); 
-        listToRmvFrom = arrRmv(currentListItems, thisText);
-        setData(currentList, listToRmvFrom);
+        allItems = getData('allItems');
+        allItems.splice(i, 1);
+        setData('allItems', allItems);
         parent.remove();
     }
     // edit item
@@ -109,7 +130,7 @@ document.onclick = (e) => {
         document.querySelector('.listHolder .list').id = classOrId;
         allLists.push(classOrId);
         setData('allLists', allLists);
-        selectList();
+        selectedList();
     }
     // delete list 
     if (clicked.classList.contains('delList')) {
@@ -128,8 +149,6 @@ document.onclick = (e) => {
             list.classList.remove('selected');
         });
         parent.classList.add('selected');
-        selectedList = document.querySelector('.selected').children[1].id
-        setData('selected', selectedList);
     }
 };
 
@@ -146,25 +165,22 @@ document.ondblclick = (e) => {
 const editPrep = (e) => {
     let parent = e.target.parentNode;
     let thisText = parent.children[0].innerText;
-    currentList = parent.parentNode.id;
-    currentListItems = getData(currentList);
-    let i = currentListItems.indexOf(thisText);
+    let i = allItems.indexOf(thisText);
     parent.classList.add('edit');
     promptBox('Edit your item..', true);
     const promptInput = document.querySelector('#promptInput');
     promptInput.value = thisText;
+    allItems = getData('allItems');
 }
 
 const editItem = () => {
     const edit = document.querySelector('.edit');
     let old = edit.children[0].innerText;
-    let num = currentListItems.indexOf(old);
-    currentListItems[num] = promptInput.value;
+    let num = allItems.indexOf(old);
+    allItems[num] = promptInput.value;
     let edited = checkLinks(promptInput.value);
     edit.children[0].innerHTML = edited;
-    setData(currentList, currentListItems);
-    console.log(currentList);
-    console.log(currentListItems);
+    setData('allItems', allItems);
     edit.classList.remove('edit');  
 }
 
@@ -182,7 +198,7 @@ const renderItems = (val) => {
         <button class="editItem"></button>
         <button class="delItem"></button>
     `;
-    const newList = document.querySelector('.selected .list');
+    const newList = document.querySelector('.list');
     newList.appendChild(li);
     addEventsDragAndDrop(li);
 }
@@ -231,12 +247,10 @@ const arrRmv = (arr, val) => {
 }
 
 
-const selectList = () => {
+const selectedList = () => {
     let lists = document.querySelectorAll('.listHolder');
-    if (lists[0] !== undefined) {
-        lists.forEach(list => {
-            list.classList.remove('selected');
-        });
-        lists[0].classList.add('selected');
-    }
+    lists.forEach(list => {
+        list.classList.remove('selected');
+    });
+    lists[0].classList.add('selected');
 }

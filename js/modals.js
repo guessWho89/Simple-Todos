@@ -185,12 +185,14 @@ const promptBox = (msg, bool, val) => {
     });
 
     document.onkeydown = (e) => {
-        if (e.keyCode === 13) {
-            e.preventDefault();
-            document.querySelector('#promptOk').click();
-        } else if (e.keyCode === 27) {
-            e.preventDefault();
-            document.querySelector('#promptCancel').click();
+        if (document.querySelector('#promptHolder') !== null) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                document.querySelector('#promptOk').click();
+            } else if (e.keyCode === 27) {
+                e.preventDefault();
+                document.querySelector('#promptCancel').click();
+            }
         }
     }
 }
@@ -245,7 +247,7 @@ const alertBox = (msg) => {
     });
 
     document.onkeydown = (e) => {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && document.querySelector('#alertHolder') !== null) {
             e.preventDefault();
             alertOk.click();
         } 
