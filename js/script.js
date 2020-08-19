@@ -151,6 +151,14 @@ document.onclick = (e) => {
         selectedList = document.querySelector('.selected').children[1].id
         setData('selected', selectedList);
     }
+    // minimize list 
+    if (clicked.classList.contains('minimizeList')) {
+        parent.parentNode.classList.add('minimize');
+    }
+    // maximize list 
+    if (clicked.classList.contains('maximizeList')) {
+        parent.parentNode.classList.remove('minimize');
+    }
 };
 
 document.ondblclick = (e) => {
@@ -211,6 +219,8 @@ const renderLists = () => {
     listHolder.innerHTML = `
         <div class="listTitle">
             <h3></h3>
+            <button class="maximizeList">&#x2610;</button>
+            <button class="minimizeList">&minus;</button>
             <button class="delList">&times;</button>
         </div>
         <ol class="list">

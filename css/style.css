@@ -60,6 +60,8 @@ button.addItem {
     /* border-bottom: 1px solid #ccc; */
 }
 
+button.maximizeList,
+button.minimizeList,
 button.delItem, 
 button.editItem,
 button.delList {
@@ -89,9 +91,19 @@ button.delList {
     background: #fff;
 }
 
+button.maximizeList,
+button.minimizeList {
+    right: 60px;
+    color: var(--gray);
+}
+
+button.maximizeList {
+    right: 30px;
+}
+
 button.delList {
     height: 40px;
-    top: 0px;
+    top: 1px;
     transform: translateY(0);
     background: transparent;
 }
@@ -108,14 +120,21 @@ input.newItem {
 div.listHolder {
     margin-bottom: 30px;
     box-shadow: 0 5px 15px 5px #ccc;
+    transition: 0.5s;
+    height: auto;
+    overflow: hidden;
 }
 
-.minimize {
-    width: 49%;
-    float: left;
-    margin: 1%;
-    height: 45px;
-    overflow: hidden;
+div.minimize {
+    display: inline-block;
+    width: 50%;
+    transform: scale(0.95);
+    max-height: 45px;
+}
+
+.minimize>.listTitle>h3 {
+    font-size: 14px;
+    line-height: 24px;
 }
 
 ol.list {
@@ -179,7 +198,8 @@ ol.list>li.item {
     display: block;
     position: absolute;
     bottom: 10px;
-    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 
