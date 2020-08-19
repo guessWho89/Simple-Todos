@@ -5,7 +5,6 @@ const list = document.querySelector('.list');
 const listsPanel = document.querySelector('.listsPanel');
 const newListBtn = document.querySelector('.newList');
 let allLists = [];
-let allItems = [];
 let checkedItems = [];
 let selectedList;
 let selectedListItems = [];
@@ -25,11 +24,12 @@ window.onload = () => {
         allLists = getData('allLists');
         allLists.forEach(list => {
             renderLists();
-            document.querySelector('.listHolder').classList.add(list + 'Holder', 'selected');
-            document.querySelector('.listHolder .list').id = list;
+            let noSpaceList = list.replace(/\s/g, '');
+            document.querySelector('.listHolder').classList.add(noSpaceList + 'Holder', 'selected');
+            document.querySelector('.listHolder .list').id = noSpaceList;
             document.querySelector('.listHolder h3').innerText = list;
-            collection[list] = [getData(list)];
-            collection[list][0].forEach(item => {
+            collection[noSpaceList] = [getData(noSpaceList)];
+            collection[noSpaceList][0].forEach(item => {
                 renderItems(item);
             });
         });
@@ -105,9 +105,9 @@ document.onclick = (e) => {
         let classOrId = promptInput.value.replace(/\s/g, '');
         renderLists();
         document.querySelector('.listHolder').classList.add(classOrId + 'Holder');
-        document.querySelector('.listHolder h3').innerText = classOrId;
+        document.querySelector('.listHolder h3').innerText = promptInput.value;
         document.querySelector('.listHolder .list').id = classOrId;
-        allLists.push(classOrId);
+        allLists.push(promptInput.value);
         setData('allLists', allLists);
         setData(classOrId, []);
         selectList();
@@ -115,8 +115,8 @@ document.onclick = (e) => {
     // delete list 
     if (clicked.classList.contains('delList')) {
         let listName = parent.children[0].innerText;
-        listName = listName.replace(/\s/g, '');
-        listHolderName = listName + 'Holder';
+        let noSpaceListName = listName.replace(/\s/g, '');
+        listHolderName = noSpaceListName + 'Holder';
         document.querySelector('.' + listHolderName).remove();
         allLists = getData('allLists');
         allLists = arrRmv(allLists, listName);
@@ -178,8 +178,8 @@ const renderItems = (val) => {
             <input type="checkbox" name="done" class="done">
             <span class="checkBox"></span>
         </label>
-        <button class="editItem"></button>
-        <button class="delItem"></button>
+        <button class="editItem">&#9998;</button>
+        <button class="delItem">&times;</button>
     `;
     const newList = document.querySelector('.selected .list');
     newList.appendChild(li);
@@ -192,7 +192,7 @@ const renderLists = () => {
     listHolder.innerHTML = `
         <div class="listTitle">
             <h3></h3>
-            <button class="delList"></button>
+            <button class="delList">&times;</button>
         </div>
         <ol class="list">
         </ol>
