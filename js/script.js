@@ -15,6 +15,7 @@ let listToRmvFrom = [];
 
 const setData = (name, val) => localStorage.setItem(name, JSON.stringify(val));
 const getData = (name) => JSON.parse(localStorage.getItem(name));
+const rmvData = (name) => localStorage.removeItem(name);
 
 
 window.onload = () => {
@@ -75,8 +76,17 @@ document.onclick = (e) => {
         currentList = parent.parentNode.id;
         currentListItems = getData(currentList); 
         listToRmvFrom = arrRmv(currentListItems, thisText);
+        parent.classList.add('itemToDel');
+        promptBox('Are you sure?');
+        document.querySelector('#promptOk').classList.add('itemDelOk');
+        document.querySelector('#promptCancel').classList.add('itemDelCancel');
+    }
+    if (clicked.classList.contains('itemDelOk')) {
         setData(currentList, listToRmvFrom);
-        parent.remove();
+        document.querySelector('.itemToDel').remove();
+    }
+    if (clicked.classList.contains('itemDelCancel')) {
+        document.querySelector('.item').classList.remove('itemToDel');
     }
     // edit item
     if (clicked.classList.contains('editItem')) {
@@ -115,12 +125,21 @@ document.onclick = (e) => {
     // delete list 
     if (clicked.classList.contains('delList')) {
         let listName = parent.children[0].innerText;
-        let noSpaceListName = listName.replace(/\s/g, '');
-        listHolderName = noSpaceListName + 'Holder';
-        document.querySelector('.' + listHolderName).remove();
         allLists = getData('allLists');
         allLists = arrRmv(allLists, listName);
+        parent.parentNode.classList.add('listToDel');
+        promptBox('Are you sure?');
+        document.querySelector('#promptOk').classList.add('listDelOk');
+        document.querySelector('#promptCancel').classList.add('listDelCancel');
+    }
+    if (clicked.classList.contains('listDelOk')) {
+        let delList= document.querySelector('.listToDel ol').id;
         setData('allLists', allLists);
+        rmvData(delList);
+        document.querySelector('.listToDel').remove();
+    }
+    if (clicked.classList.contains('listDelCancel')) {
+        document.querySelector('.listHolder').classList.remove('listToDel');
     }
     // select list 
     if (clicked.classList.contains('listTitle')) {
