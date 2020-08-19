@@ -95,6 +95,7 @@ button.maximizeList,
 button.minimizeList {
     right: 60px;
     color: var(--gray);
+    background: transparent;
 }
 
 button.maximizeList {
