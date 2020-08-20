@@ -26,7 +26,7 @@ window.onload = () => {
         allLists.forEach(list => {
             renderLists();
             let noSpaceList = list.replace(/\s/g, '');
-            document.querySelector('.listHolder').classList.add(noSpaceList + 'Holder', 'selected');
+            document.querySelector('.listHolder').classList.add(noSpaceList + 'Holder', 'selected', 'minimize');
             document.querySelector('.listHolder .list').id = noSpaceList;
             document.querySelector('.listHolder h3').innerText = list;
             collection[noSpaceList] = [getData(noSpaceList)];
@@ -277,9 +277,7 @@ const selectList = () => {
     if (lists[0] !== undefined) {
         lists.forEach(list => {
             list.classList.remove('selected');
-            list.classList.add('minimize');
         });
         lists[0].classList.add('selected');
-        lists[0].classList.remove('minimize');
     }
 }
