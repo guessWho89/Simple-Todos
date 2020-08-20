@@ -77,7 +77,7 @@ document.onclick = (e) => {
         currentListItems = getData(currentList); 
         listToRmvFrom = arrRmv(currentListItems, thisText);
         parent.classList.add('itemToDel');
-        promptBox('Are you sure?');
+        promptBox('Sure you want to delete this item?');
         document.querySelector('#promptOk').classList.add('itemDelOk');
         document.querySelector('#promptCancel').classList.add('itemDelCancel');
     }
@@ -128,7 +128,7 @@ document.onclick = (e) => {
         allLists = getData('allLists');
         allLists = arrRmv(allLists, listName);
         parent.parentNode.classList.add('listToDel');
-        promptBox('Are you sure?');
+        promptBox('Sure you want to delete this list?');
         document.querySelector('#promptOk').classList.add('listDelOk');
         document.querySelector('#promptCancel').classList.add('listDelCancel');
     }
@@ -146,8 +146,21 @@ document.onclick = (e) => {
         let lists = document.querySelectorAll('.listHolder');
         lists.forEach(list => {
             list.classList.remove('selected');
+            list.classList.add('minimize');
         });
         parent.classList.add('selected');
+        parent.classList.remove('minimize');
+        selectedList = document.querySelector('.selected').children[1].id
+        setData('selected', selectedList);
+    }
+    if (clicked.classList.contains('title')) {
+        let lists = document.querySelectorAll('.listHolder');
+        lists.forEach(list => {
+            list.classList.remove('selected');
+            list.classList.add('minimize');
+        });
+        parent.parentNode.classList.add('selected');
+        parent.parentNode.classList.remove('minimize');
         selectedList = document.querySelector('.selected').children[1].id
         setData('selected', selectedList);
     }
@@ -218,7 +231,7 @@ const renderLists = () => {
     listHolder.classList.add('listHolder');
     listHolder.innerHTML = `
         <div class="listTitle">
-            <h3></h3>
+            <h3 class="title"></h3>
             <button class="maximizeList">&#x2610;</button>
             <button class="minimizeList">&minus;</button>
             <button class="delList">&times;</button>
@@ -264,7 +277,9 @@ const selectList = () => {
     if (lists[0] !== undefined) {
         lists.forEach(list => {
             list.classList.remove('selected');
+            list.classList.add('minimize');
         });
         lists[0].classList.add('selected');
+        lists[0].classList.remove('minimize');
     }
 }

@@ -23,8 +23,8 @@ a {
     word-break: break-all;
 }
 
-.box { 
-    padding: 10px;
+.box {
+    padding: 10px 5px;
     margin: auto;
 }
 
@@ -74,7 +74,6 @@ button.delList {
     cursor: pointer;
     border: none;
     font-size: 22px;
-    font-weight: bold;
 }
 
 button.editItem {
@@ -94,12 +93,13 @@ button.delList {
 button.maximizeList,
 button.minimizeList {
     right: 60px;
-    color: var(--gray);
+    color: #555;
     background: transparent;
 }
 
 button.maximizeList {
     right: 30px;
+    filter: drop-shadow(4px -3px 0px var(--gray));
 }
 
 button.delList {
@@ -119,18 +119,20 @@ input.newItem {
 }
 
 div.listHolder {
-    margin-bottom: 30px;
+    display: inline-block;
+    height: auto;
+    width: 99%;
+    overflow: hidden;
+    margin-bottom: 20px;
     box-shadow: 0 5px 15px 5px #ccc;
     transition: 0.5s;
-    height: auto;
-    overflow: hidden;
+    margin: 0px 0.5% 20px;
 }
 
 div.minimize {
-    display: inline-block;
-    width: 50%;
-    transform: scale(0.95);
-    max-height: 45px;
+    width: 49%;
+    margin: 0px 0.5% 20px;
+    height: 45px;
 }
 
 .minimize>.listTitle>h3 {
@@ -161,6 +163,7 @@ span.itemText {
     min-height: 40px;
     padding: 10px;
     cursor: grab;
+    color: #555;
 }
 
 ol.list>li.item { 
@@ -240,11 +243,11 @@ div.newListBtnHolder {
 button.newList {
     display: block;
     margin: auto;
-    background: var(--gray);
+    background: var(--green);
     opacity: 0.5;
     font-weight: bold;
     font-size: 24px;
-    padding: 0 0 2px;
+    padding: 0px;
     margin-bottom: 5px;
     transition: 0.3s;
     line-height: 1;
@@ -260,6 +263,7 @@ button.newList:hover {
 p.newListText {
     text-align: center;
     font-size: 14px;
+    color: #555;
 }
 
 div.listTitle {
@@ -267,9 +271,10 @@ div.listTitle {
     padding: 10px;
     border: 1px solid #ccc;
     border-bottom: none;
-    background: #eee;
+    background: #fcffca;
     cursor: pointer;
     height: 44px;
+    color: #444;
 }
 
 div.listTitle h3 {
@@ -277,5 +282,5 @@ div.listTitle h3 {
 }
 
 .selected {
-    outline: 2px solid var(--blue);
+    outline: 1px solid var(--blue);
 }
