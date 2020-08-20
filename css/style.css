@@ -56,10 +56,9 @@ div.listsPanel {
 
 button.addItem {
     background: var(--green);
-    /* font-weight: bold; */
-    /* border-bottom: 1px solid #ccc; */
 }
 
+button.more,
 button.maximizeList,
 button.minimizeList,
 button.delItem, 
@@ -74,27 +73,48 @@ button.delList {
     cursor: pointer;
     border: none;
     font-size: 22px;
+    background: transparent;
+}
+
+label.doneLabel,
+button.delItem, 
+button.editItem {
+    transition: 0.5s;
+    transform: scale(0);
+    top: 0;
+}
+
+.show {
+    transform: scale(1)!important;
+}
+
+button.delItem {
+    right: 30px;
 }
 
 button.editItem {
-    /* background: url(../img/edit.png) center center/23px no-repeat; */
     color: var(--blue);
-    background: #fff;
-    right: 30px;
+    right: 60px;
+}
+
+label.doneLabel {
+    right: 90px;
+}
+
+button.more {
+    font-weight: bold;
+    color: #555;
 }
 
 button.delItem,
 button.delList {
-    /* background: url(../img/trash.png) center center/22px no-repeat; */
     color: var(--pink);
-    background: #fff;
 }
 
 button.maximizeList,
 button.minimizeList {
     right: 60px;
     color: #555;
-    background: transparent;
 }
 
 button.maximizeList {
@@ -112,7 +132,6 @@ button.delList {
 input.newItem {
     border: none;
     outline: none;
-    /* border-bottom: 1px solid #ccc; */
     padding: 10px;
     font-size: 14px;
     width: 100%;
@@ -139,13 +158,11 @@ div.minimize {
     font-size: 14px;
     line-height: 24px;
     overflow: hidden;
-    white-space: nowrap; /* Don't forget this one */
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 ol.list {
-    /* box-shadow: 0 5px 30px 5px #ccc; */
-    /* border: 1px solid #ccc; */
     margin: 0px auto 0px;
     min-height: 40px;
 }
@@ -162,11 +179,19 @@ li.item:last-child {
 
 span.itemText {
     display: block;
-    width: calc(100% - 90px);
+    width: calc(100% - 30px);
     min-height: 40px;
     padding: 10px;
     cursor: grab;
     color: #555;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: 0.5s;
+}
+
+.short {
+    width: calc(100% - 120px)!important;
 }
 
 ol.list>li.item { 
@@ -228,7 +253,6 @@ ol.list>li.item {
 
 ol.list>li.over {
     background: #ccc;
-    /* box-shadow: 0 0 5px #ccc; */
 }
 
 .grabbed {
@@ -248,7 +272,6 @@ button.newList {
     margin: auto;
     background: var(--green);
     opacity: 0.5;
-    /* font-weight: bold; */
     font-size: 24px;
     padding: 0px;
     margin-bottom: 5px;
@@ -280,7 +303,6 @@ div.listTitle {
 }
 
 div.listTitle h3 {
-    /* height: 0; */
     width: calc(100% - 80px);
 }
 

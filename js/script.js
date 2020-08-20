@@ -26,7 +26,7 @@ window.onload = () => {
         allLists.forEach(list => {
             renderLists();
             let noSpaceList = list.replace(/\s/g, '');
-            document.querySelector('.listHolder').classList.add(noSpaceList + 'Holder', 'selected', 'minimize');
+            document.querySelector('.listHolder').classList.add(noSpaceList + 'Holder', 'selected');
             document.querySelector('.listHolder .list').id = noSpaceList;
             document.querySelector('.listHolder h3').innerText = list;
             collection[noSpaceList] = [getData(noSpaceList)];
@@ -35,6 +35,7 @@ window.onload = () => {
             });
         });
     }
+    listsToMinimize();
     getChecked();
     selectList();
 };
@@ -167,10 +168,20 @@ document.onclick = (e) => {
     // minimize list 
     if (clicked.classList.contains('minimizeList')) {
         parent.parentNode.classList.add('minimize');
+        minimized();
     }
     // maximize list 
     if (clicked.classList.contains('maximizeList')) {
         parent.parentNode.classList.remove('minimize');
+        minimized();
+    }
+    // more options
+    if (clicked.classList.contains('more')) {
+        let options = parent.children;
+        options[0].classList.toggle('short');
+        [options[1], options[2], options[3]].forEach(option => {
+            option.classList.toggle('show');
+        });
     }
 };
 
@@ -215,11 +226,12 @@ const renderItems = (val) => {
     li.innerHTML = `
         <span class="itemText">`+val+`</span>
         <label class="doneLabel">
-            <input type="checkbox" name="done" class="done">
-            <span class="checkBox"></span>
+        <input type="checkbox" name="done" class="done">
+        <span class="checkBox"></span>
         </label>
         <button class="editItem">&#9998;</button>
         <button class="delItem">&times;</button>
+        <button class="more">&#8942;</button>
     `;
     const newList = document.querySelector('.selected .list');
     newList.appendChild(li);
@@ -271,7 +283,6 @@ const arrRmv = (arr, val) => {
     });
 }
 
-
 const selectList = () => {
     let lists = document.querySelectorAll('.listHolder');
     if (lists[0] !== undefined) {
@@ -280,4 +291,20 @@ const selectList = () => {
         });
         lists[0].classList.add('selected');
     }
+}
+
+const minimized = () => {
+    let minimizedLists = document.querySelectorAll('.minimize');
+    let miniLists = [];
+    minimizedLists.forEach(list => {
+        miniLists.push(list.children[1].id);
+    });
+    setData('minimized', miniLists);
+}
+
+const listsToMinimize = () => {
+    let toMinimize = getData('minimized');
+    toMinimize.forEach(list => {
+        document.querySelector('.' + list + 'Holder').classList.add('minimize');
+    });
 }
