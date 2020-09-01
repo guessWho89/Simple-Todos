@@ -6,7 +6,7 @@
     "start_url": "index.html?source=pwa",
     "display": "fullscreen",
     "scope": "/",
-    "theme_color": "#fff",
+    "theme_color": "#eee",
     "icons": [
       {
         "src": "img/icon-192x192.png",

@@ -76,9 +76,7 @@ button.delList {
     background: transparent;
 }
 
-label.doneLabel,
-button.delItem, 
-button.editItem {
+button.delItem, button.editItem {
     transition: 0.5s;
     transform: scale(0);
     top: 0;
@@ -98,7 +96,7 @@ button.editItem {
 }
 
 label.doneLabel {
-    right: 90px;
+    left: 0px;
 }
 
 button.more {
@@ -179,7 +177,7 @@ li.item:last-child {
 
 span.itemText {
     display: block;
-    width: calc(100% - 30px);
+    width: calc(100% - 60px);
     min-height: 40px;
     padding: 10px;
     cursor: grab;
@@ -188,6 +186,8 @@ span.itemText {
     white-space: nowrap;
     text-overflow: ellipsis;
     transition: 0.5s;
+    margin-left: 30px;
+    transition: 0s;
 }
 
 .short {
@@ -230,8 +230,8 @@ ol.list>li.item {
     display: block;
     position: absolute;
     bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 100%;
+    transform: translateX(-100%);
 }
 
 
